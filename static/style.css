@@ -1,0 +1,149 @@
+@media (max-width: 900px) {
+    body { flex-direction: column; overflow-y: auto; }
+    .sidebar { width: 100%; height: auto; border-radius: 0 0 30px 30px; }
+    .main-content { padding: 20px; }
+    .stats-container { grid-template-columns: 1fr; }
+}
+
+/* වර්ණ විචල්‍යයන් (CSS Variables) */
+:root {
+    --bg-color: #f8fafc; /* ලයිට් තීම් එකේ පසුබිම */
+    --text-color: #1e293b; /* සාමාන්‍ය අකුරු වල පාට */
+    --heading-color: #1e3c72; /* මාතෘකා වල පාට (හොඳට පේන නිල් පාටක්) */
+    --card-bg: #ffffff; /* කාඩ් එකේ පාට */
+    --card-text: #64748b; /* කාඩ් එකේ විස්තර වල පාට */
+}
+
+[data-theme="dark"] {
+    --bg-color: #0f172a; /* ඩාර්ක් තීම් එකේ පසුබිම */
+    --text-color: #f8fafc; 
+    --heading-color: #38bdf8; /* ඩාර්ක් එකේදී මාතෘකා වලට ලා නිල් පාටක් */
+    --card-bg: #1e293b;
+    --card-text: #94a3b8;
+}
+
+/* මේ අලුත් වර්ණ හැමතැනටම අදාළ කිරීම */
+body {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* මෙතනදී මම ටිකක් වෙනස් කරනවා, trending-container එකේ තියෙන h1 වලට විතරක් අලුත් පාට අදාළ වෙන්න */
+.trending-container h1, .trending-container .card h3 {
+    color: var(--heading-color) !important;
+}
+
+
+.card p {
+    color: var(--card-text) !important;
+    transition: color 0.4s ease;
+}
+
+.card {
+    background-color: var(--card-bg) !important;
+    transition: background-color 0.4s ease, transform 0.3s ease;
+}
+
+/* මුළු සයිට් එකටම පොදු පසුබිම */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Trending පේජ් එකේ කාඩ් (cards) වලට ලස්සනක් */
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+/* Button එක තව ලස්සන කරමු */
+.btn-discover {
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* Details Page සඳහා වෙනම Style එකක් */
+.details-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 30px;
+    border-radius: 25px;
+    margin: 20px auto;
+    max-width: 800px;
+    color: #fff;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.details-image {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    transition: transform 0.3s;
+}
+
+.details-image:hover {
+    transform: scale(1.02);
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #06b6d4;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* කාඩ්ස් ග්‍රිඩ් එක */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* එක කාඩ් එකක් */
+.card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e2e8f0;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #1e3c72;
+}
+
+.card p {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+

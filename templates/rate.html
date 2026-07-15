@@ -1,0 +1,105 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Poppins', sans-serif;
+        overflow: hidden;
+    }
+
+    /* ලස්සන Animation Background එක */
+    body::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: -1;
+        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                    url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=2000') no-repeat center center fixed;
+        background-size: cover;
+        animation: animateBg 10s linear infinite alternate;
+    }
+
+    @keyframes animateBg {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.1); }
+    }
+
+    .rating-container {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px 40px;
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        text-align: center;
+        width: 350px;
+        color: #1e293b;
+        position: relative; /* Close button එක හරි තැනට එන්න */
+        backdrop-filter: blur(10px);
+    }
+
+    /* Close Button එක */
+    .close-btn {
+        position: absolute;
+        top: 10px; right: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        color: #888;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    .close-btn:hover { color: #333; }
+
+    h1 { font-size: 1.4rem; margin: 0 0 10px 0; color: #1e3c72; }
+    p { font-size: 0.9rem; margin: 0 0 15px 0; color: #64748b; }
+
+    .stars span {
+        font-size: 40px;
+        cursor: pointer;
+        color: #ccc;
+        transition: 0.2s;
+    }
+    .stars span:hover, .stars span:hover ~ span { color: #f59e0b; }
+
+    .btn-back {
+        background: #1e3c72;
+        color: white;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 15px;
+        cursor: pointer;
+        margin-top: 15px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="rating-container">
+    <!-- කතිරය -->
+    <a href="/trending" class="close-btn">&times;</a>
+    
+    <h1>Rate {{ place_name }}</h1>
+    <p>How was your experience at {{ place_name }}?</p>
+    
+    <div class="stars">
+        <span onclick="submitRating(1)">★</span>
+        <span onclick="submitRating(2)">★</span>
+        <span onclick="submitRating(3)">★</span>
+        <span onclick="submitRating(4)">★</span>
+        <span onclick="submitRating(5)">★</span>
+    </div>
+
+    <div id="ratingMessage" style="margin-top: 15px; font-weight: bold; color: #1e3c72;"></div>
+    
+    <button onclick="window.location.href='/trending'" class="btn-back">Back to Home</button>
+</div>
+
+<script>
+    function submitRating(rating) {
+        document.getElementById("ratingMessage").innerText = "Thank you for rating " + rating + " stars!";
+        setTimeout(function() {
+            window.location.href = '/trending';
+        }, 1500);
+    }
+</script>

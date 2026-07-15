@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Lankan Food Guide</title>
+    <style>
+        /* Animated Background */
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', sans-serif;
+            background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+            url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            animation: zoomEffect 10s infinite alternate;
+        }
+
+        @keyframes zoomEffect {
+            0% { background-size: 100% 100%; }
+            100% { background-size: 110% 110%; }
+        }
+
+        /* Glassmorphism Card */
+        .article-container {
+            padding: 50px 8%;
+            max-width: 600px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #0f0e0e;
+        }
+
+        /* Image Styling */
+        .article-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.5s ease;
+        }
+
+        .article-image:hover { transform: scale(1.02); }
+
+        h1 { color: #112549; font-size: 2.5em; text-align: center; margin-bottom: 20px; }
+
+        h3 { 
+            color: #111516; 
+            font-size: 1.3em; 
+            margin-top: 25px;
+        }
+
+        ul { list-style-type: none; padding: 0; }
+
+        li { 
+            margin-bottom: 15px; 
+            padding: 15px; 
+            background: rgba(255, 255, 255, 0.5); 
+            border-radius: 10px; 
+        }
+
+        .back-btn {
+            display: block;
+            width: fit-content;
+            margin: 40px auto 0;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #1e3c72, #00b4db);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,180,219,0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div class="article-container">
+    <h1>Sri Lankan Food Guide</h1>
+    
+    <!-- පින්තූරේ path එක නිවැරදිදැයි බලන්න -->
+    <img src="{{ url_for('static', filename='images/food_guide.jpg') }}" alt="Sri Lankan Food" class="article-image">
+    
+    <p>Sri Lankan cuisine is a vibrant explosion of flavors, spices, and fresh ingredients. Here are some must-try local dishes:</p>
+    
+    <ul>
+        <li><strong>Rice & Curry:</strong> The heart of Sri Lankan meals.</li>
+        <li><strong>Kottu Roti:</strong> A popular street food made with chopped roti.</li>
+        <li><strong>Hoppers:</strong> Crispy pancake made from rice flour and coconut milk.</li>
+    </ul>
+
+    <a href="/" class="back-btn">← Back to Home</a>
+</div>
+
+</body>
+</html>

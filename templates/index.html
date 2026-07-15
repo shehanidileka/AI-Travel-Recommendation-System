@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CeylonVibe - Premium Travel Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+.footer-wrapper { background: #0f172a; color: #cbd5e1; padding: 60px 8% 30px 8%; margin-top: 50px; }
+.footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: 0 auto; }
+.footer-col { flex: 1; min-width: 250px; }
+.footer-col ul li a { 
+    text-decoration: none; 
+    color: white !important; /* මෙතන white දෙන්න */
+    transition: 0.3s; 
+}
+
+.footer-col ul li a:hover { 
+    color: var(--accent); /* Hover කරද්දී විතරක් වෙනත් පාටක් එනවා */
+    padding-left: 5px; 
+}
+        /* Smooth Scrolling effect එක මුළු පිටුවටම */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ... (ඔයාගේ ඉතිරි CSS Code එක මෙතැන් සිට) ... */
+:root {
+    --primary-color: #1e3c72;
+    /* ... */
+}
+
+        :root {
+            --primary: #1e3c72;
+            --secondary: #2a5298;
+            --accent: #00b4db;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--light); color: var(--dark); top: 0 !important; }
+
+        /* Modern Navigation Bar */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; background: rgba(255, 255, 255, 0.95); box-shadow: 0 4px 20px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
+        .logo { font-size: 24px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+        .logo span { color: var(--accent); }
+        .nav-right-container { display: flex; align-items: center; gap: 25px; }
+        nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
+        nav ul li a { text-decoration: none; color: #475569; font-weight: 500; transition: 0.3s; font-size: 15px; }
+        nav ul li a:hover { color: var(--accent); }
+        
+        .btn-nav-ai { background: linear-gradient(135deg, var(--accent), #0083b0); color: white !important; padding: 10px 24px; border-radius: 30px; font-weight: 600; box-shadow: 0 4px 15px rgba(0, 180, 219, 0.3); transition: 0.3s; }
+        .btn-nav-ai:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 180, 219, 0.4); }
+
+        /* 🎨 GOOGLE TRANSLATE DROPDOWN BOX */
+        #google_translate_element {
+            display: inline-block !important;
+            position: relative;
+        }
+        .goog-te-gadget-simple, .goog-te-menu-value, .goog-te-gadget span, .goog-te-banner-frame {
+            display: none !important;
+        }
+        .goog-te-gadget {
+            color: transparent !important;
+            font-size: 0 !important;
+        }
+        .goog-te-combo {
+            display: block !important;
+            font-family: 'Poppins', sans-serif !important;
+            border: 2px solid #e2e8f0 !important;
+            background: #ffffff !important;
+            color: var(--primary) !important;
+            padding: 6px 10px !important;
+            border-radius: 20px !important;
+            font-weight: 600 !important;
+            font-size: 12px !important;
+            outline: none !important;
+            cursor: pointer !important;
+            height: 34px !important;
+            min-width: 140px !important;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02) !important;
+            transition: all 0.3s ease !important;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231e3c72'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") !important;
+            background-repeat: no-repeat !important;
+            background-position: right 8px center !important;
+            background-size: 16px !important;
+            padding-right: 24px !important;
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            appearance: none !important;
+        }
+
+        /* Premium Hero Section */
+        .hero { height: 85vh; background: linear-gradient(rgba(15, 23, 42, 0.55), rgba(30, 60, 114, 0.45)), url('https://images.unsplash.com/photo-1546708973-b339540b5162?q=80&w=1600') center/cover no-repeat; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 0 20px; }
+        .hero h1 { font-size: 56px; font-weight: 700; margin-bottom: 20px; letter-spacing: -1px; line-height: 1.2; }
+        .hero p { font-size: 20px; max-width: 700px; margin-bottom: 35px; opacity: 0.95; font-weight: 300; }
+        .hero .btn-main { padding: 16px 40px; background: var(--accent); color: white; text-decoration: none; border-radius: 30px; font-weight: 600; font-size: 16px; box-shadow: 0 6px 25px rgba(0,180,219,0.5); transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .hero .btn-main:hover { transform: translateY(-3px); background: #0083b0; box-shadow: 0 8px 30px rgba(0,180,219,0.6); }
+       .hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.rain-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.drop {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3); /* වැස්සේ පාට (සුදු/අළු) */
+    width: 2px; /* වැස්සේ ගනකම */
+    height: 20px; /* වැස්සේ දිග */
+    top: -25px;
+    animation: rainFall linear infinite;
+}
+
+@keyframes rainFall {
+    to { transform: translateY(90vh); }
+}
+
+        /* Core Stats Counter Badge Section */
+        .stats-badge-container { display: flex; justify-content: center; gap: 50px; background: white; padding: 30px; border-radius: 16px; max-width: 900px; margin: -60px auto 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.08); position: relative; z-index: 10; }
+        .stat-item { text-align: center; flex: 1; border-right: 1px solid #e2e8f0; }
+        .stat-item:last-child { border-right: none; }
+        .stat-item h3 { font-size: 32px; color: var(--primary); font-weight: 700; }
+        .stat-item p { font-size: 13px; color: #64748b; text-transform: uppercase; font-weight: 600; margin-top: 5px; }
+
+        /* ⛅ Custom Premium HTML Weather Grid Style */
+        .weather-grid-custom { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 900px; margin: 20px auto 0 auto; }
+        .weather-mini-card { background: white; padding: 20px; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #e2e8f0; text-align: center; transition: 0.3s; }
+        .weather-mini-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+        .weather-mini-card h4 { color: var(--primary); font-size: 16px; font-weight: 600; margin-bottom: 5px; }
+        .weather-mini-card .temp { font-size: 28px; font-weight: 700; color: var(--dark); margin: 8px 0; }
+        .weather-mini-card .condition { font-size: 13px; color: #64748b; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+        /* Destination Categories Section */
+        .section-title { text-align: center; margin-top: 80px; margin-bottom: 40px; }
+        .section-title h2 { font-size: 36px; color: var(--primary); font-weight: 700; }
+        .section-title p { color: #64748b; font-size: 16px; margin-top: 5px; }
+
+        .categories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; padding: 0 8%; margin-bottom: 80px; }
+        .category-card { position: relative; height: 250px; border-radius: 14px; overflow: hidden; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; }
+        .category-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .category-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.1)); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; color: white; }
+        .category-overlay h3 { font-size: 20px; font-weight: 600; }
+        .category-overlay p { font-size: 12px; opacity: 0.8; }
+        .category-card:hover img { transform: scale(1.1); }
+        .category-card:hover { transform: translateY(-5px); }
+
+        /* Premium Trending Cards Grid */
+        .trending-container { padding: 60px 8% 100px 8%; background: #f1f5f9; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 35px; }
+        .card { 
+    background: white; 
+    border-radius: 16px; 
+    overflow: hidden; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.03); 
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* අලුත් animation එකක් */
+    border: 1px solid #e2e8f0; 
+}
+
+.card:hover { 
+    transform: translateY(-12px) scale(1.02); /* ටිකක් Zoom වෙලා උඩට එනවා */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+}
+        .card-img-wrapper { position: relative; height: 240px; overflow: hidden; }
+        .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        .price-badge { position: absolute; top: 20px; right: 20px; background: white; color: var(--primary); padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 13px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        
+        .card-body { padding: 25px; }
+        .card-tag { font-size: 12px; color: var(--accent); font-weight: 600; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .card-body h3 { color: var(--primary); font-size: 22px; margin-bottom: 12px; font-weight: 600; }
+        .card-body p { color: #64748b; font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 15px; font-size: 13px; color: #475569; }
+        .card-footer span i { color: var(--accent); margin-right: 5px; }
+
+        /* Footer Element */
+        footer { background: #0f172a; color: #94a3b8; padding: 50px 8% 30px 8%; font-size: 14px; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 30px; margin-bottom: 20px; }
+        .footer-logo { font-size: 24px; font-weight: 700; color: white; }
+        .footer-logo span { color: var(--accent); }
+        .footer-links a { color: #94a3b8; text-decoration: none; margin-left: 20px; transition: 0.3s; }
+        .footer-links a:hover { color: white; }
+        footer .copy { text-align: center; font-size: 12px; opacity: 0.6; }
+
+.category-card {
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.category-card:hover {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    transform: translateY(-10px);
+}
+
+/* Nav bar එකට පොඩි border-bottom එකක් */
+nav {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Weather card වලට gradient background එකක් */
+.weather-mini-card {
+    background: linear-gradient(135deg, #ffffff, #f1f5f9);
+}
+
+
+.tips-container {
+    width: 100%;
+    overflow: hidden;
+    background: #e7eef5;
+    padding: 20px 0;
+    margin: 40px 0;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.tips-track {
+    display: flex;
+    gap: 40px;
+    animation: scroll 20s linear infinite;
+    white-space: nowrap;
+}
+
+.tip-card {
+    font-size: 15px;
+    color: var(--primary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px;
+}
+
+.tip-card i { color: var(--accent); }
+
+@keyframes scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+.tips-track:hover { animation-play-state: paused; 
+}
+
+#preloader {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader-content { text-align: center; }
+.loader-content i { font-size: 50px; color: var(--primary); margin-bottom: 15px; }
+.loader-content h2 { font-size: 28px; color: var(--primary); }
+.loader-content span { color: var(--accent); }
+
+.loading-bar { width: 200px; height: 4px; background: #e2e8f0; border-radius: 2px; margin-top: 15px; overflow: hidden; }
+.progress { width: 0%; height: 100%; background: var(--accent); animation: load 2s linear forwards; }
+
+@keyframes load { 100% { width: 100%; } }
+
+.progress-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 4px; /* ඉරේ ඝනකම */
+    background: transparent;
+    z-index: 9999;
+}
+
+.progress-bar {
+    height: 4px;
+    background: var(--accent); /* ඔයාගේ accent පාටම පාවිච්චි කරමු */
+    width: 0%;
+}
+    
+/* Subscribe Section එක ලස්සනට හදන CSS */
+.subscribe-section {
+    background: #1e3c72; /* ගැඹුරු නිල් පාට */
+    padding: 60px 20px;
+    text-align: center;
+    color: white;
+    border-radius: 20px; /* කොන් ටික වට කරමු */
+    margin: 40px auto;
+    max-width: 900px; /* ගොඩක් දිග නැතුව ලස්සනට තියෙන්න */
+}
+
+.subscribe-section h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.subscribe-section p {
+    margin-bottom: 25px;
+    opacity: 0.8;
+}
+
+/* Form එක මැදට කරන CSS */
+#subscribeForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap; /* පොඩි තිර වලදී උඩ යට වෙන්න */
+}
+
+#subscribeForm input {
+    padding: 12px 20px;
+    border-radius: 30px;
+    border: none;
+    width: 350px;
+    outline: none;
+}
+
+#subscribeForm button {
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: none;
+    background: #00b4db;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+#subscribeForm button:hover {
+    background: #0083b0;
+    transform: scale(1.05);
+}
+    </style>
+</head>
+<body>
+
+    <div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+</div>
+
+    <div id="preloader">
+    <div class="loader-content">
+        <i class="fa-solid fa-compass fa-spin"></i>
+        <h2>Ceylon<span>Vibe</span></h2>
+        <div class="loading-bar"><div class="progress"></div></div>
+    </div>
+</div>
+
+    <nav>
+        <div class="logo"><i class="fa-solid fa-compass"></i> Ceylon<span>Vibe</span></div>
+        <div class="nav-right-container">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="{{ url_for('explore') }}">Explore</a></li>
+                <li><a href="{{ url_for('trending') }}">Trending Places</a></li>
+                <li><a href="/planner" class="btn-nav-ai"><i class="fa-solid fa-robot"></i> AI Trip Planner</a></li>
+            </ul>
+            <div id="google_translate_element"></div>
+        </div>
+    </nav>
+
+   <div class="hero">
+    <!-- අකුරු ටික එහෙමම තියෙන්න -->
+    <h1>Intelligent Travel Experiences<br>In Sri Lanka</h1>
+    <p>Skip the manual planning. Let our advanced Supervised Machine Learning models match your exact vibe with optimized itineraries instantly.</p>
+    <a href="/planner" class="btn-main">Launch AI Trip Planner <i class="fa-solid fa-wand-magic-sparkles"></i></a>
+
+    <!-- වැස්ස සඳහා container එක විතරක් ඇති -->
+    <div class="rain-container" aria-hidden="true"></div>
+</div>
+    </div>
+
+    <div class="stats-badge-container">
+        <div class="stat-item">
+            <h3>50+</h3>
+            <p>Verified Destinations</p>
+        </div>
+        <div class="stat-item">
+            <h3>92%</h3>
+            <p>ML Model Accuracy</p>
+        </div>
+        <div class="stat-item">
+            <h3>100%</h3>
+            <p>Tailored Personalization</p>
+        </div>
+    </div>
+
+    <!-- Travel Tips Carousel -->
+<div class="tips-container">
+    <div class="tips-track" id="tipsTrack">
+        <div class="tip-card"><i class="fa-solid fa-lightbulb"></i> Best time to visit Sigiriya is early morning (7 AM).</div>
+        <div class="tip-card"><i class="fa-solid fa-train"></i> Don't miss the iconic scenic train ride to Ella!</div>
+        <div class="tip-card"><i class="fa-solid fa-umbrella"></i> Carry a light jacket if you're heading to Nuwara Eliya.</div>
+        <div class="tip-card"><i class="fa-solid fa-camera"></i> Galle Fort sunsets are perfect for photography.</div>
+        <div class="tip-card"><i class="fa-solid fa-leaf"></i> Respect local customs when visiting ancient temples.</div>
+    </div>
+</div>
+
+    <div class="weather-section" style="padding: 0 8%; margin-top: 50px; text-align: center;">
+        <h3 style="color: #1e3c72; font-weight: 600; margin-bottom: 5px;"><i class="fa-solid fa-cloud-sun"></i> Live Sri Lanka Destination Weather</h3>
+        
+        <div class="weather-grid-custom">
+            <div class="weather-mini-card">
+                <h4>Colombo</h4>
+                <div class="temp">31°C</div>
+                <div class="condition" style="color: #eab308;"><i class="fa-solid fa-sun"></i> Sunny Feel</div>
+            </div>
+            <div class="weather-mini-card">
+                <h4>Kandy</h4>
+                <div class="temp">26°C</div>
+                <div class="condition" style="color: #38bdf8;"><i class="fa-solid fa-cloud-sun"></i> Partly Cloudy</div>
+            </div>
+            <div class="weather-mini-card">
+                <h4>Ella</h4>
+                <div class="temp">22°C</div>
+                <div class="condition" style="color: #64748b;"><i class="fa-solid fa-cloud-rain"></i> Light Showers</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title" id="categories">
+        <h2>Select Your Destination Vibe</h2>
+        <p>Curated Sri Lankan travel clusters analyzed by our classification system.</p>
+    </div>
+
+    <div class="categories-grid">
+        <div class="category-card">
+            <img src="{{ url_for('static', filename='images/beach.jpg') }}" alt="Beaches">
+            <div class="category-overlay">
+                <h3>Tropical Beaches</h3>
+                <p>Galle, Mirissa, Hikkaduwa</p>
+            </div>
+        </div>
+        
+        <div class="category-card">
+            <img src="{{ url_for('static', filename='images/culture.jpg') }}" alt="Culture">
+            <div class="category-overlay">
+                <h3>Cultural Heritage</h3>
+                <p>Sigiriya, Kandy, Anuradhapura</p>
+            </div>
+        </div>
+        
+        <div class="category-card">
+            <img src="{{ url_for('static', filename='images/nature.jpg') }}" alt="Nature">
+            <div class="category-overlay">
+                <h3>Hill Country Hikes</h3>
+                <p>Ella, Nuwara Eliya, Adams Peak</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="map" style="height: 400px; width: 80%; margin: 40px auto; border-radius: 16px; border: 2px solid #e2e8f0;"></div>
+
+    <div class="trending-container" id="trending">
+        <div class="section-title" style="margin-top: 0;">
+            <h2>Top Recommended Packages</h2>
+            <p>Most frequently optimized destination sequences generated by our dataset rows.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1542856391-010fb87dcfed?q=80&w=600" alt="Ella">
+                    <div class="price-badge">3 Days Ideal</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tag">Highlands / Adventure</div>
+                    <h3>The Misty Wonders of Ella</h3>
+                    <p>Experience iconic Nine Arch Bridge, challenging Ella Rock hikes, and premium tea estate hospitality tailored for cold climate lovers.</p>
+                    <div class="card-footer">
+                        <span><i class="fa-solid fa-train"></i> Via Train</span>
+                        <span><strong>Medium Budget</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?q=80&w=600" alt="Galle">
+                    <div class="price-badge">2 Days Ideal</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tag">Coastal / Heritage</div>
+                    <h3>Galle Colonial Fort Escape</h3>
+                    <p>Walk through centuries-old Dutch architecture, vibrant boutique cafes, and beautiful golden sunset views along coastal ramparts.</p>
+                    <div class="card-footer">
+                        <span><i class="fa-solid fa-car"></i> Via Car</span>
+                        <span><strong>High Budget</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section style="padding: 60px 8%; background: #ffffff;">
+    <h2 style="text-align: center; color: #1e3c72; margin-bottom: 40px;">What Our Travelers Say</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        <div style="padding: 25px; border-left: 4px solid #00b4db; background: #f8fafc; border-radius: 8px;">
+            <p style="font-style: italic; color: #475569;">"CeylonVibe helped me plan the perfect Ella trip. The AI recommendations were spot on!"</p>
+            <h4 style="margin-top: 15px; color: #1e3c72;">- Sarah J.</h4>
+        </div>
+        <div style="padding: 25px; border-left: 4px solid #00b4db; background: #f8fafc; border-radius: 8px;">
+            <p style="font-style: italic; color: #475569;">"The best travel portal I've used in Sri Lanka. Absolutely seamless experience."</p>
+            <h4 style="margin-top: 15px; color: #1e3c72;">- Ramesh K.</h4>
+        </div>
+    </div>
+</section>
+
+<section class="subscribe-section">
+    <h3>Subscribe to our travel updates</h3>
+    <p>Get the latest travel tips and destination guides delivered to your inbox.</p>
+    <form action="/subscribe" method="POST" id="subscribeForm">
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+    </form>
+</section>
+
+    <footer class="footer-wrapper">
+    <div class="footer-container">
+        <div class="footer-col">
+            <div class="footer-logo"><i class="fa-solid fa-compass"></i> Ceylon<span>Vibe</span></div>
+            <p>Empowering travelers with AI-driven, personalized Sri Lankan experiences. Your ultimate smart travel companion.</p>
+        </div>
+
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/explore">Explore</a></li>
+                <li><a href="/trending">Trending Places</a></li>
+                <li><a href="/ai-planner">AI Planner</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Contact Us</h3>
+            <p><i class="fa-solid fa-envelope"></i> info@ceylonvibe.com</p>
+            <p><i class="fa-solid fa-phone"></i> +94 11 234 5678</p>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="copy">&copy; 2026 CeylonVibe System Architecture. All Rights Reserved.</div>
+</br>
+</footer>
+
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+      
+      var checkGoogleInterval = setInterval(function() {
+          var combo = document.querySelector('.goog-te-combo');
+          if (combo && combo.options && combo.options.length > 0) {
+              combo.options[0].text = 'Select Language';
+              clearInterval(checkGoogleInterval);
+          }
+      }, 100);
+    }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+   <script>
+    window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    setTimeout(() => {
+        preloader.style.display = 'none';
+    }, 2000); // තත්පර 2ක් ලෝඩ් වෙලා අයින් වෙනවා
+}); 
+</script>
+
+<script>
+window.onscroll = function() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("myBar").style.width = scrolled + "%";
+};
+</script>
+
+<script>
+    var map = L.map('map').setView([7.8731, 80.7718], 8); // Sri Lanka coordinates
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // උදාහරණයක් විදියට එක Marker එකක්
+    L.marker([6.877, 81.047]).addTo(map).bindPopup("Ella - Scenic Highlands!");
+</script>
+<script>
+    const rainContainer = document.querySelector('.rain-container');
+    
+    for (let i = 0; i < 30; i++) {
+        const drop = document.createElement('div');
+        drop.classList.add('drop');
+        
+        // අහඹු විදිහට මුළු පළල පුරාම බෙදෙන්න
+        drop.style.left = (Math.random() * 98) + '%'; 
+        
+        // වේගය සහ delay එක
+        drop.style.animationDuration = (Math.random() * 0.7 + 0.8) + 's';
+        drop.style.animationDelay = Math.random() * 2 + 's';
+        
+        rainContainer.appendChild(drop);
+    }
+</script>
+
+<script>
+    document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // පේජ් එක Refresh වෙන එක නවත්තනවා
+        
+        // ලස්සන Alert එක
+        Swal.fire({
+            title: 'Subscribed!',
+            text: 'Thank you! You have subscribed to our travel updates.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#00b4db', // ඔයාගේ accent පාට
+            background: '#ffffff',
+            color: '#1e3c72'
+        });
+        
+        this.reset(); // පෝරමය හිස් කරනවා
+    });
+</script>
+</body>
+</html>

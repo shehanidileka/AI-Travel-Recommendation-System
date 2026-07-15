@@ -1,0 +1,199 @@
+Destination,Budget,Weather,Travel_Method,Duration
+Nuwara Eliya,Low,Cold,Walking,1
+Anuradhapura,Low,Hot,Car,1
+Ella,High,Cold,Train,1
+Hikkaduwa,High,Hot,Train,3
+Kandy,High,Cold,Train,2
+Sigiriya,Low,Hot,Bus,1
+Yala,Medium,Hot,Car,3
+Horton Plains,High,Cold,Train,3
+Polonnaruwa,Low,Hot,Car,2
+Mirissa,Medium,Hot,Train,1
+Adams Peak,High,Cold,Train,2
+Kitulgala,Medium,Hot,Bus,1
+Trincomalee,Medium,Hot,Car,1
+Jaffna,Medium,Hot,Bus,3
+Sinharaja,High,Hot,Bus,2
+Galle Fort,High,Hot,Car,2
+Negombo,Low,Hot,Train,2
+Pasikudah,High,Hot,Car,2
+Unawatuna,High,Hot,Train,2
+Arugam Bay,Low,Hot,Train,1
+Pidurangala,High,Hot,Bus,1
+Badulla,Low,Cold,Bus,1
+Bandarawela,Medium,Cold,Train,2
+Haputale,High,Cold,Bus,2
+Udawalawe,High,Hot,Car,1
+Wilpattu,Medium,Hot,Car,3
+Knuckles,Low,Cold,Walking,3
+Meemure,Low,Hot,Walking,2
+Nilaveli,Medium,Hot,Bus,3
+Pigeon Island,High,Hot,Car,2
+Bentota,Low,Hot,Car,1
+Kalpitiya,Medium,Hot,Bus,2
+Mannar,Low,Hot,Bus,4
+Kataragama,Low,Hot,Car,2
+Dambulla,High,Hot,Car,2
+Matara,Medium,Hot,Car,1
+Weligama,High,Hot,Car,3
+Tangalle,Medium,Hot,Train,3
+Kumana,High,Hot,Car,2
+Wasgamuwa,High,Hot,Car,1
+Belihuloya,Low,Cold,Train,1
+Hatton,Low,Cold,Walking,2
+Maskeliya,Low,Cold,Walking,2
+Dunhinda Falls,High,Hot,Car,1
+Diyaluma Falls,High,Hot,Car,1
+Ambuluwawa,High,Cold,Bus,1
+Sembuwatta,High,Cold,Walking,1
+Riverston,High,Cold,Walking,2
+Madulsima,Medium,Cold,Walking,1
+Delft Island,Medium,Hot,Train,3
+Colombo,High,Hot,Bus,2
+Ratnapura,Low,Cold,Car,3
+Kurunegala,High,Hot,Bus,2
+Kegalle,High,Hot,Train,3
+Avissawella,Low,Hot,Bus,2
+Embilipitiya,High,Hot,Bus,3
+Monaragala,High,Hot,Bus,2
+Ampara,Low,Hot,Car,1
+Batticaloa,Medium,Hot,Bus,1
+Vavuniya,Low,Hot,Bus,2
+Kilinochchi,High,Hot,Bus,2
+Mullaitivu,Low,Hot,Car,4
+Point Pedro,High,Hot,Train,3
+Nagadeepa,High,Hot,Car,2
+Kayts,High,Hot,Car,4
+Casuarina Beach,Medium,Hot,Bus,2
+Chilaw,High,Hot,Bus,2
+Marawila,Low,Hot,Car,1
+Waikkal,Medium,Hot,Car,1
+Wennappuwa,High,Hot,Train,1
+Puttalam,Low,Hot,Train,1
+Kalutara,High,Hot,Car,1
+Beruwala,Low,Hot,Car,1
+Wadduwa,Low,Hot,Bus,3
+Ahangama,Medium,Hot,Car,2
+Midigama,High,Hot,Car,1
+Dickwella,High,Hot,Train,3
+Hambantota,Low,Hot,Bus,2
+Kirinda,Low,Hot,Bus,1
+Rekawa,High,Hot,Car,2
+Hiriketiya,Medium,Hot,Bus,2
+Dondra,High,Hot,Bus,1
+Koggala,High,Hot,Train,1
+Ahungalla,Medium,Hot,Car,2
+Induruwa,Low,Hot,Car,1
+Aluthgama,High,Hot,Car,2
+Balapitiya,Medium,Hot,Car,1
+Madu River,Medium,Hot,Bus,1
+Kosgoda,Medium,Hot,Car,3
+Rumassala,Low,Hot,Car,3
+Jungle Beach,Low,Hot,Car,1
+Mihintale,Medium,Hot,Bus,2
+Ritigala,Low,Hot,Car,2
+Yapahuwa,Low,Hot,Bus,2
+Panduwasnuwara,Medium,Hot,Bus,2
+Aukana,Medium,Hot,Car,2
+Medirigiriya,Low,Hot,Car,1
+Habarana,Low,Hot,Car,1
+Aluvihare,High,Hot,Bus,2
+Nalanda Gedige,Low,Hot,Bus,3
+Bundala,Medium,Hot,Car,1
+Horowpathana,Medium,Hot,Car,3
+Lunugamvehera,Medium,Hot,Car,2
+Gal Oya,Medium,Hot,Car,3
+Minneriya,Medium,Hot,Car,2
+Kaudulla,Medium,Hot,Car,2
+Maduru Oya,High,Hot,Car,1
+Angammedilla,High,Hot,Car,1
+Lahugala,Medium,Hot,Car,1
+Wilpattu North,High,Hot,Car,1
+Sinharaja Kudawa,Low,Hot,Bus,1
+Bopath Ella,Medium,Hot,Car,1
+Ravana Falls,Medium,Hot,Walking,1
+Bambarakanda Falls,High,Hot,Bus,1
+Laxapana Falls,High,Hot,Car,1
+St Clair's Falls,High,Hot,Bus,1
+Devon Falls,High,Hot,Walking,1
+Aberdeen Falls,Medium,Hot,Bus,1
+Baker's Falls,Low,Hot,Bus,1
+Ohiya,Medium,Cold,Train,1
+Pattipola,High,Cold,Train,3
+Diyatalawa,Medium,Cold,Train,2
+Welimada,Low,Cold,Walking,2
+Gampola,High,Cold,Train,2
+Nawalapitiya,Medium,Cold,Walking,2
+Talawakele,Low,Cold,Train,2
+Kotagala,Low,Cold,Bus,1
+Lindula,Low,Cold,Bus,2
+Dickoya,High,Cold,Train,2
+Ramboda,High,Cold,Walking,2
+Pussellawa,Low,Cold,Walking,1
+Kadugannawa,High,Cold,Train,1
+Yatiyantota,Low,Cold,Walking,2
+Norwood,High,Cold,Walking,1
+Bogawantalawa,Low,Cold,Bus,1
+Watawala,Medium,Cold,Bus,1
+Dalhousie,Low,Cold,Bus,1
+Nallathanniya,Low,Cold,Walking,2
+Elephant Pass,Medium,Hot,Car,4
+Kalmunai,Low,Hot,Car,1
+Nallur Kandaswamy Temple,Medium,Hot,Bus,2
+Jaffna Fort,Medium,Hot,Car,4
+Talaimannar,Low,Hot,Car,2
+Pesalai,Low,Hot,Car,2
+Silavathurai,Low,Hot,Bus,1
+Snake Island,Medium,Hot,Bus,2
+Anawilundawa,Medium,Hot,Car,1
+Wirawila,High,Hot,Car,1
+Sooriyawewa,High,Hot,Car,3
+Buduruwagala,Low,Hot,Car,1
+Muthiyangana Temple,Low,Cold,Bus,3
+Namunukula,Low,Cold,Bus,1
+Ella Rock,Medium,Cold,Walking,2
+Little Adams Peak,Medium,Cold,Walking,2
+Nine Arch Bridge,High,Cold,Walking,1
+Lipton's Seat,High,Cold,Bus,1
+Demodara,Low,Cold,Bus,2
+Idalgashinna,High,Cold,Train,3
+Poonagala,High,Cold,Walking,1
+Wellawaya,Medium,Cold,Bus,1
+Buttala,Medium,Cold,Walking,3
+Okkampitiya,High,Hot,Car,1
+Sithulpawwa,High,Hot,Car,2
+Katharagama Kiri Vehera,Medium,Hot,Car,2
+Menik Ganga,High,Hot,Car,2
+Panama,High,Hot,Train,1
+Okanda,High,Hot,Train,2
+Pottuvil,High,Hot,Bus,1
+Whiskey Point,Medium,Hot,Bus,1
+Peanut Farm,High,Hot,Bus,3
+Elephant Rock Arugam Bay,Medium,Hot,Train,2
+Batadombalena,Medium,Hot,Car,1
+Rathnapura Gem Mines,Medium,Cold,Car,1
+Sri Pada Nallathanniya Trail,Low,Cold,Walking,2
+Kirindi Oya,Medium,Hot,Car,2
+Muthurajawela,Low,Hot,Car,1
+Kalu Diya Pokuna,Low,Hot,Bus,1
+Isurumuniya,High,Hot,Car,1
+Jetavanaramaya,Medium,Hot,Car,3
+Ruwanwelisaya,High,Hot,Bus,2
+Thuparamaya,Medium,Hot,Car,1
+Abhayagiri Dagoba,High,Hot,Bus,1
+Twin Ponds Anuradhapura,Medium,Hot,Bus,1
+Lankatilaka Temple,High,Hot,Bus,3
+Gal Vihara Polonnaruwa,Low,Hot,Car,3
+Royal Palace Polonnaruwa,Low,Hot,Bus,2
+Rankoth Vehera,Medium,Hot,Bus,3
+Nalanda Temple,High,Cold,Walking,2
+Alu Vihara Matale,High,Cold,Bus,3
+Matale Spice Garden,High,Cold,Bus,2
+Embekke Devalaya,High,Cold,Train,2
+Lankatilaka Kandy,Medium,Cold,Bus,1
+Gadaladeniya Temple,Medium,Cold,Walking,3
+Temple of the Tooth,High,Cold,Bus,1
+Royal Botanical Garden Peradeniya,Medium,Cold,Bus,1
+Udawattakele,Medium,Cold,Car,1
+Bahirawakanda Buddha Statue,Medium,Cold,Bus,2
+Kandy Lake,Low,Cold,Car,1

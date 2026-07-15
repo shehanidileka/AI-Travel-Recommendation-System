@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Sri Lanka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body { background: #f1f5f9; color: #1e293b; font-family: 'Poppins', sans-serif; margin: 0; }
+        
+        /* Navbar */
+        .navbar { background: white; padding: 20px 8%; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: 700; color: #1e3c72; display: flex; align-items: center; gap: 10px; }
+        .logo span { color: #00b4db; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { color: #475569; text-decoration: none; font-weight: 500; }
+        .nav-links a:hover { color: #00b4db; }
+
+        .explore-container { padding: 50px 8%; }
+        h1 { color: #1e3c72; text-align: center; margin-bottom: 40px; }
+
+        /* Map Section */
+        .map-section { margin-bottom: 50px; }
+        .map-container { width: 100%; height: 400px; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: 0.3s; }
+        .map-container:hover { box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+
+          .footer { text-align: center; padding: 40px 30px; margin-top: 80px; border-top: 1px solid #e2e8f0; color: #94a3b8; font-size: 0.9rem; }
+        .social-links { margin-top: 15px; }
+        .social-links a { color: #00b4db; margin: 0 12px; font-size: 1.4rem; transition: 0.3s; }
+        .social-links a:hover { color: #1e3c72; }
+
+        /* Live Weather හෙඩින් එක ලස්සන කිරීම */
+.weather-section h2 {
+    position: relative;
+    padding-bottom: 10px;
+    margin-bottom: 30px; /* පේළි දෙක අතර ඉඩ තියන්න */
+    color: #1e3c72;
+    text-align: center;
+}
+
+.weather-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: #00b4db; /* ඔයාගේ වෙබ් සයිට් එකේ ප්‍රධාන වර්ණය */
+    border-radius: 2px;
+}
+
+        .route-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+    border: 2px solid transparent; /* මුලින් බෝඩරය විනිවිද පෙනෙන ලෙස තබන්න */
+}
+
+.route-card:hover {
+    transform: translateY(-10px);
+    /* නිල් පාටින් Glow එකක් සහ border එකක් */
+    box-shadow: 0 10px 30px rgba(30, 60, 114, 0.4) !important;
+    border: 2px solid #1e3c72 !important;
+}
+
+.route-card i {
+    font-size: 40px !important;
+    margin-bottom: 15px;
+    background: linear-gradient(90deg, #00b4db, #1e3c72);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.routes-section h2 {
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.routes-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: #00b4db;
+    border-radius: 2px;
+}
+
+.routes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+/* Articles Section Style */
+.featured-articles h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: #00b4db;
+    border-radius: 2px;
+}
+
+.article-card {
+    transition: transform 0.3s ease;
+}
+
+.article-card:hover {
+    transform: translateY(-10px);
+}
+.style{ text-align: center; margin-top: 50px; padding: 20px; }
+
+.feedback-container {
+    max-width: 450px; /* මේක 600 සිට 450 දක්වා අඩු කළා */
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 30px; /* Padding එකත් පොඩ්ඩක් අඩු කළා */
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08); /* Shadow එකත් පොඩ්ඩක් සැහැල්ලු කළා */
+}
+.feedback-container input, .feedback-container textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.feedback-container input:focus, .feedback-container textarea:focus {
+    border-color: #00b4db;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 180, 219, 0.2);
+}
+
+.feedback-container button {
+    width: 100%;
+    background: linear-gradient(90deg, #00b4db, #1e3c72);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.feedback-container button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 180, 219, 0.4);
+}
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo"><i class="fa-solid fa-compass"></i> Ceylon<span>Vibe</span></div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/explore">Explore</a></li>
+            <li><a href="/trending">Trending Places</a></li>
+            <li><a href="/planner" class="btn-nav-ai"> AI Planner</a></li>
+        </ul>
+    </nav>
+
+    <div class="explore-container">
+        <h1>Explore All Destinations</h1>
+        
+        <div class="map-section">
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15853.9!2d79.8!3d6.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae253d10f7a7003%3A0x320b2e4d32d3838d!2sColombo!5e0!3m2!1sen!2slk!4v1680000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <br>
+
+        <!-- Weather Widget -->
+<div class="weather-section" style="margin-bottom: 50px;">
+    <h2 style="text-align: center; color: #1e3c72;">Live Weather Updates</h2>
+    <a class="weatherwidget-io" href="https://forecast7.com/en/6d9379d86/colombo/" data-label_1="COLOMBO" data-label_2="WEATHER" data-theme="pure" >COLOMBO WEATHER</a>
+    <script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget.io');
+    </script>
+</div>
+
+<div class="routes-section" style="padding: 40px 8%;">
+    <h2 style="text-align: center; color: #1e3c72; margin-bottom: 30px;">Popular Travel Routes</h2>
+    <div class="routes-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        
+        <!-- Route 1 -->
+        <div class="route-card" style="background: white; padding: 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
+            <i class="fa-solid fa-mountain-sun" style="font-size: 30px; color: #00b4db;"></i>
+            <h3>Cultural Triangle</h3>
+            <p>Colombo - Dambulla - Sigiriya - Polonnaruwa - Kandy</p>
+        </div>
+
+        <!-- Route 2 -->
+        <div class="route-card" style="background: white; padding: 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
+            <i class="fa-solid fa-train" style="font-size: 30px; color: #00b4db;"></i>
+            <h3>Hill Country Train</h3>
+            <p>Kandy - Nanu Oya - Ella - Badulla</p>
+        </div>
+
+        <!-- Route 3 -->
+        <div class="route-card" style="background: white; padding: 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
+            <i class="fa-solid fa-umbrella-beach" style="font-size: 30px; color: #00b4db;"></i>
+            <h3>Southern Coast</h3>
+            <p>Colombo - Galle - Mirissa - Tangalle - Yala</p>
+        </div>
+
+        <div class="route-card" style="background: white; padding: 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
+            <i class="fa-solid fa-sailboat" style="font-size: 30px; color: #00b4db;"></i>
+            <h3>Eastern Paradise</h3>
+            <p>Colombo - Trincomalee - Pasikudah - Arugam Bay</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- Travel Tips & Guides -->
+<section id="travel-tips" class="featured-articles" style="padding: 40px 8%;">
+    <h2 style="text-align: center; color: #1e3c72; margin-bottom: 40px; position: relative; padding-bottom: 10px;">Travel Tips & Guides</h2>
+    
+    <div class="articles-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+    
+   <!-- Article 1: Best Time to Visit -->
+<div class="article-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+    <div style="height: 200px; overflow: hidden;">
+        <img src="{{ url_for('static', filename='images/best_time.jpg') }}" alt="Sri Lanka Beach" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div style="padding: 20px;">
+        <h3>Best Time to Visit</h3>
+        <p>Learn about the ideal months to visit Sri Lanka's beautiful beaches...</p>
+        <a href="{{ url_for('best_time') }}" style="color: #00b4db; font-weight: bold;">Read More →</a>
+    </div>
+</div>
+
+<!-- Article 2: Local Food Guide -->
+<div class="article-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+    <div style="height: 200px; overflow: hidden;">
+        <img src="{{ url_for('static', filename='images/food_guide.jpg') }}" alt="Sri Lankan Food" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div style="padding: 20px;">
+        <h3>Local Food Guide</h3>
+        <p>Discover the must-try traditional Sri Lankan dishes...</p>
+       <a href="{{ url_for('food_guide') }}" style="color: #00b4db; font-weight: bold;">Read More →</a>
+    </div>
+</div>
+</section>
+
+<!-- Feedback Section -->
+<section class="feedback-section" style="padding: 60px 8%; background: #f8fafc; margin-top: 50px;">
+    <div class="feedback-container">
+        <h2 style="text-align: center; color: #1e3c72; margin-bottom: 10px;">Your Feedback Matters!</h2>
+        <p style="text-align: center; color: #64748b; margin-bottom: 30px;">Share your thoughts with us.</p>
+        
+        <!-- action සහ method අයින් කරලා id එකක් දාන්න -->
+<form id="feedbackForm">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your suggestions or feedback..." rows="5" required></textarea>
+    <button type="submit">Submit Feedback</button>
+</form>
+    </div>
+</section>
+
+    <footer class="footer">
+        <p>Ceylon Vibe © 2027 | Explore the beauty of Sri Lanka</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+       <a href="/admin/feedbacks" style="color: #64748b; font-size: 12px;">Admin Panel</a>
+    </p>
+    </footer>
+
+<script>
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // පේජ් එක Refresh වීම නවත්වනවා
+        console.log("Submit button එක එබුවා!");
+
+        const formData = new FormData(this);
+
+        fetch('/submit-feedback', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                Swal.fire({
+    title: 'Success!',
+    text: 'Thank you for your feedback!',
+    icon: 'success',
+    confirmButtonText: 'OK',
+    background: '#fff',
+    backdrop: true
+}); // පේජ් එකේම Alert එකක් පෙන්වනවා
+                document.getElementById('feedbackForm').reset(); // Form එක හිස් කරනවා
+            } else {
+                alert("Something went wrong!");
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+
+</body>
+</html>

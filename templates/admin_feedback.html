@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Feedback List</title>
+    <style>
+        body { font-family: 'Poppins', sans-serif; padding: 40px;
+         background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+         background-size: cover;         
+         background-position: center;    
+         background-attachment: fixed;    
+         background-repeat: no-repeat;
+         animation: zoomEffect 20s infinite alternate;
+}
+
+@keyframes zoomEffect {
+    from {
+        background-size: 100% 100%;
+    }
+    to {
+        background-size: 120% 120%;
+    }
+}
+        
+        .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.2); /* 20% සුදු පාටක් සහිත පාරදෘශ්‍ය බව */
+    backdrop-filter: blur(15px);          /* පිටුපස බොඳ කිරීම */
+    -webkit-backdrop-filter: blur(15px);  /* Safari බ්‍රව්සර් එකට */
+    
+    border: 1px solid rgba(255, 255, 255, 0.3); /* ලා පැහැති බෝඩරයක් */
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); /* ගැඹුරු සෙවනැල්ලක් */
+}
+
+        h2 { color: #1e3c72; text-align: center; margin-bottom: 30px; }
+
+        table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 20px; border-radius: 15px; overflow: hidden; }
+        
+        th { background: #1e3c72; color: white; padding: 15px; text-align: left; }
+        
+        td { padding: 15px; border-bottom: 1px solid #e2e8f0; color: #0e1216; }
+        
+       /* Mouse එක තියෙනකම් ඉන්න ඕනේ නැහැ, මේක හැමතිස්සෙම පේනවා */
+tr {
+    background-color: rgba(255, 255, 255, 0.4); /* Glass effect එකට ගැලපෙන විදිහට ටිකක් සුදු පාටින් */
+    transition: background 0.3s ease; /* ලස්සනට වෙනස් වෙන්න */
+}
+
+/* දැන් mouse එක තියද්දී තව ටිකක් තද වෙන්න ඕනේ නම් විතරක් මේක තියාගන්න */
+tr:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+        .btn-logout { background: #ff4d4d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; font-weight: bold; float: right; transition: 0.3s; }
+        .btn-logout:hover { background: #e63946; transform: translateY(-2px); }
+        
+        .btn-back { display: inline-block; margin-top: 20px; color: #0d0d0e; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="/logout" class="btn-logout">Logout</a>
+    <h2>Customer Feedback List</h2>
+    
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+        </tr>
+        {% for feedback in feedbacks %}
+        <tr>
+            <td>{{ feedback[0] }}</td>
+            <td>{{ feedback[1] }}</td>
+            <td>{{ feedback[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <a href="/explore" class="btn-back">← Back to Explore</a>
+</div>
+
+</body>
+</html>

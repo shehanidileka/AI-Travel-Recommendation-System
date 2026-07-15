@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book your trip</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* පින්තූරය ලොකු වෙද්දී Scrollbars එන එක නවත්වන්න */
+        }
+
+       /* පින්තූරය වෙනම Layer එකකට ගැනීම */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            /* මේ තියෙන්නේ මුලින්ම තිබුණු පින්තූරයේ ලින්ක් එක */
+           background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=2000') no-repeat center center fixed;
+            background-size: cover;
+            animation: animateBg 10s linear infinite alternate; 
+        }
+        @keyframes animateBg {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); } /* සෙමින් 1.1 දක්වා zoom වේ */
+        }
+
+        /* Form එකේ Box එක (මෙය කිසිසේත් සෙලවෙන්නේ නැත) */
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 25px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            .container {
+    color: #000000; /* අකුරු පැහැදිලි කළු පැහැයට */
+    font-weight: 500; /* ටිකක් ඝනකම වැඩි කිරීම */
+}
+        }
+
+        h2 { color: #333; margin-bottom: 25px; font-weight: 600; text-align: center; }
+
+        label {
+    color: #020202 !important;
+    font-weight: 600;
+}
+
+        input {
+            width: 100%; padding: 12px; margin: 10px 0 20px 0;
+            border: 2px solid #eee; border-radius: 12px;
+            transition: border 0.3s;
+        }
+
+        input:focus { border-color: #818cf8; outline: none; }
+
+        button {
+            background: #818cf8; color: white; border: none;
+            padding: 15px; width: 100%; border-radius: 12px;
+            font-size: 16px; font-weight: 600; cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover { background: #6366f1; }
+
+        /* "Back to Trending" බොත්තම සඳහා පෙනුම */
+
+        #message {
+            margin-top: 20px; font-weight: 600;
+            color: #059669; text-align: center;
+            padding: 10px; border-radius: 8px;
+            background: #d1fae5; display: none;
+        }
+
+        .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.container {
+    position: relative;
+    /* වීදුරු පෙනුම සඳහා වැඩි දියුණු කළ පසුබිම */
+    background: rgba(255, 255, 255, 0.15); /* පසුබිම පාරදෘශ්‍ය බව වැඩි කළා */
+    backdrop-filter: blur(20px); /* බොඳ කිරීම තව වැඩි කළා */
+    -webkit-backdrop-filter: blur(20px);
+    
+    /* මායිම් සහ සෙවනැලි */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    
+    padding: 40px;
+    border-radius: 25px;
+    width: 100%;
+    max-width: 450px;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+    <!-- කතිරය -->
+<a href="javascript:history.back()" class="close-btn">&times;</a>
+
+        <h2>Book your trip to: {{ place }}</h2>
+        <form id="bookingForm" onsubmit="submitBooking(event)">
+            <input type="hidden" id="place_name" value="{{ place }}">
+            
+            <label>Your Name:</label>
+            <input type="text" id="user_name" required>
+            
+            <label>Date:</label>
+            <input type="date" id="travel_date" required>
+            
+            <label>Number of People:</label>
+            <input type="number" id="people" min="1" required>
+            
+            <button type="submit">Confirm Booking</button>
+        </form>
+
+        <!-- Form එකට පස්සේ තියෙන මේ කොටස වෙනස් කරන්න -->
+<div id="message"></div>
+</div>
+
+<script>
+function submitBooking(event) {
+    event.preventDefault();
+
+    const data = {
+        place_name: document.getElementById('place_name').value,
+        user_name: document.getElementById('user_name').value,
+        travel_date: document.getElementById('travel_date').value,
+        people: document.getElementById('people').value
+    };
+
+    fetch('/confirm_booking', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+    const msgDiv = document.getElementById('message');
+    const backBtn = document.getElementById('back-button-container'); // අලුත් බොත්තම
+    
+    msgDiv.innerText = result.message; 
+    msgDiv.style.display = 'block';
+    backBtn.style.display = 'block'; // මේක එකතු කරන්න
+    
+    document.getElementById('bookingForm').reset();
+    
+        setTimeout(() => {
+            msgDiv.style.display = 'none';
+        }, 4000);
+    });
+}
+</script>
+
+</body>
+</html>
